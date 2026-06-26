@@ -1,301 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>My Errands</title>
+<title>Errands Pro</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-background:#0f172a;
-color:white;
-padding:20px;
-}
-
-.container{
-max-width:700px;
-margin:auto;
-}
-
-h1{
-text-align:center;
-margin-bottom:15px;
-font-size:40px;
-}
-
-.top{
-display:flex;
-gap:10px;
-margin-bottom:20px;
-}
-
-input{
-flex:1;
-padding:14px;
-border:none;
-border-radius:12px;
-font-size:16px;
-}
-
-select{
-padding:14px;
-border:none;
-border-radius:12px;
-}
-
-button{
-padding:14px;
-border:none;
-border-radius:12px;
-background:#2563eb;
-color:white;
-cursor:pointer;
-}
-
-.card{
-margin-top:20px;
-background:rgba(255,255,255,.08);
-padding:20px;
-border-radius:20px;
-backdrop-filter:blur(20px);
-}
-
-.task{
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:rgba(255,255,255,.08);
-padding:12px;
-border-radius:12px;
-margin-top:10px;
-}
-
-.left{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.done{
-text-decoration:line-through;
-opacity:.5;
-}
-
-.progress{
-height:12px;
-background:#334155;
-border-radius:20px;
-margin:20px 0;
-overflow:hidden;
-}
-
-.bar{
-height:100%;
-width:0%;
-background:#22c55e;
-}
-
-.search{
-width:100%;
-margin-bottom:20px;
-}
-
-.mode{
-margin-top:20px;
-width:100%;
-background:#475569;
-}
-
-</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="background"></div>
 
-<h1>🗓️ My Errands</h1>
-
-<input class="search" id="search" placeholder="Search task...">
-
-<div class="top">
-<input id="task" placeholder="New task">
-<select id="section">
-<option>Today</option>
-<option>Tomorrow</option>
-<option>This Week</option>
-</select>
-<button onclick="addTask()">Add</button>
-</div>
-
-<div class="progress">
-<div class="bar" id="bar"></div>
-</div>
-
-<div id="today" class="card">
-<h2>📅 Today</h2>
-</div>
-
-<div id="tomorrow" class="card">
-<h2>🌅 Tomorrow</h2>
-</div>
-
-<div id="week" class="card">
-<h2>🗓️ This Week</h2>
-</div>
-
-<button class="mode" onclick="toggleMode()">🌙 Toggle Dark Mode</button>
-
-</div>
-
-<script>
-
-let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
-
-function save(){
-localStorage.setItem("tasks",JSON.stringify(tasks));
-render();
-}
-
-function addTask(){
-
-let name=document.getElementById("task").value.trim();
-
-if(name=="")return;
-
-tasks.push({
-text:name,
-section:document.getElementById("section").value,
-done:false
-});
-
-document.getElementById("task").value="";
-
-save();
-
-}
-
-function render(){
-
-today.innerHTML="<h2>📅 Today</h2>";
-tomorrow.innerHTML="<h2>🌅 Tomorrow</h2>";
-week.innerHTML="<h2>🗓️ This Week</h2>";
-
-let search=document.getElementById("search").value.toLowerCase();
-
-let completed=0;
-
-tasks.forEach((t,i)=>{
-
-if(!t.text.toLowerCase().includes(search))return;
-
-if(t.done)completed++;
-
-let div=document.createElement("div");
-
-div.className="task";
-
-div.innerHTML=`
-
-<div class="left">
-
-<input type="checkbox" ${t.done?"checked":""}
-onclick="toggle(${i})">
-
-<span class="${t.done?"done":""}">${t.text}</span>
-
-</div>
+<header>
 
 <div>
 
-<button onclick="editTask(${i})">✏️</button>
+<h1>🗓 Errands Pro</h1>
 
-<button onclick="removeTask(${i})">🗑️</button>
+<p id="todayDate"></p>
 
 </div>
 
-`;
+<button id="themeBtn">
+🌙
+</button>
 
-if(t.section=="Today")
-today.appendChild(div);
+</header>
 
-if(t.section=="Tomorrow")
-tomorrow.appendChild(div);
+<section class="hero">
 
-if(t.section=="This Week")
-week.appendChild(div);
+<div class="progress-card">
 
-});
+<h2>Today's Progress</h2>
 
-let percent=tasks.length?completed/tasks.length*100:0;
+<div class="circle">
 
-document.getElementById("bar").style.width=percent+"%";
+<div id="percent">
+0%
+</div>
 
-}
+</div>
 
-function toggle(i){
+<p id="progressText">
+0 of 0 Completed
+</p>
 
-tasks[i].done=!tasks[i].done;
+</div>
 
-save();
+<div class="streak-card">
 
-}
+🔥
 
-function removeTask(i){
+<h2 id="streak">
+0
+</h2>
 
-tasks.splice(i,1);
+<p>Day Streak</p>
 
-save();
+</div>
 
-}
+</section>
 
-function editTask(i){
+<section class="addTask">
 
-let n=prompt("Edit task",tasks[i].text);
+<input
+id="taskInput"
+placeholder="What do you need to do today?">
 
-if(n){
+<select id="category">
 
-tasks[i].text=n;
+<option>🏠 Personal</option>
 
-save();
+<option>🛒 Grocery</option>
 
-}
+<option>💼 Work</option>
 
-}
+<option>🚗 Travel</option>
 
-document.getElementById("search").oninput=render;
+<option>🏋 Fitness</option>
 
-function toggleMode(){
+</select>
 
-if(document.body.style.background=="white"){
+<select id="priority">
 
-document.body.style.background="#0f172a";
+<option>High</option>
 
-document.body.style.color="white";
+<option selected>Medium</option>
 
-}else{
+<option>Low</option>
 
-document.body.style.background="white";
+</select>
 
-document.body.style.color="black";
+<select id="day">
 
-}
+<option>Today</option>
 
-}
+<option>Tomorrow</option>
 
-render();
+<option>This Week</option>
 
-</script>
+</select>
+
+<button id="addBtn">
+
+＋ Add Task
+
+</button>
+
+</section>
+
+<section class="searchBox">
+
+<input
+id="search"
+placeholder="🔍 Search task...">
+
+</section>
+
+<section>
+
+<div class="sectionTitle">
+
+📅 Today
+
+</div>
+
+<div id="todayList" class="list"></div>
+
+</section>
+
+<section>
+
+<div class="sectionTitle">
+
+🌅 Tomorrow
+
+</div>
+
+<div id="tomorrowList" class="list"></div>
+
+</section>
+
+<section>
+
+<div class="sectionTitle">
+
+🗓 This Week
+
+</div>
+
+<div id="weekList" class="list"></div>
+
+</section>
+
+<footer>
+
+Made with ❤️ using GitHub Pages
+
+</footer>
+
+<script src="app.js"></script>
 
 </body>
+
 </html>
