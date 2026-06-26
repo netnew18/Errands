@@ -4,16 +4,27 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Errands Pro</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color"
+content="#2563eb">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -21,156 +32,606 @@
 
 <div class="background"></div>
 
-<header>
+<header class="header">
 
-<div>
+<div class="header-left">
 
-<h1>🗓 Errands Pro</h1>
+<h1>
 
-<p id="todayDate"></p>
+🗓 Errands Pro
+
+</h1>
+
+<p id="todayDate">
+
+Loading date...
+
+</p>
 
 </div>
 
-<button id="themeBtn">
+<div class="header-right">
+
+<button
+id="themeBtn"
+class="iconBtn">
+
 🌙
+
 </button>
+
+</div>
 
 </header>
 
-<section class="hero">
+<section class="dashboard">
 
-<div class="progress-card">
+<div class="glass progress-card">
 
-<h2>Today's Progress</h2>
+<h2>
 
-<div class="circle">
+Today's Progress
 
-<div id="percent">
+</h2>
+
+<div
+class="progressCircle">
+
+<div
+class="innerCircle">
+
+<span id="percent">
+
 0%
+
+</span>
+
 </div>
 
 </div>
 
 <p id="progressText">
+
 0 of 0 Completed
+
 </p>
 
 </div>
 
-<div class="streak-card">
+<div class="glass streak-card">
+
+<div class="emoji">
 
 🔥
 
+</div>
+
 <h2 id="streak">
+
 0
+
 </h2>
 
-<p>Day Streak</p>
+<p>
+
+Day Streak
+
+</p>
+
+</div>
+
+<div class="glass stats-card">
+
+<h2>
+
+Today's Goal
+
+</h2>
+
+<h1 id="goalCount">
+
+0
+
+</h1>
+
+<p>
+
+Tasks Remaining
+
+</p>
 
 </div>
 
 </section>
 
-<section class="addTask">
+<section class="controls">
+
+<h2>
+
+Create New Task
+
+</h2>
+
+<div class="taskForm">
 
 <input
 id="taskInput"
+type="text"
 placeholder="What do you need to do today?">
 
 <select id="category">
 
-<option>🏠 Personal</option>
+<option value="Personal">
 
-<option>🛒 Grocery</option>
+🏠 Personal
 
-<option>💼 Work</option>
+</option>
 
-<option>🚗 Travel</option>
+<option value="Work">
 
-<option>🏋 Fitness</option>
+💼 Work
+
+</option>
+
+<option value="Shopping">
+
+🛒 Shopping
+
+</option>
+
+<option value="Travel">
+
+🚗 Travel
+
+</option>
+
+<option value="Fitness">
+
+🏋 Fitness
+
+</option>
 
 </select>
 
 <select id="priority">
 
-<option>High</option>
+<option value="High">
 
-<option selected>Medium</option>
+🔴 High
 
-<option>Low</option>
+</option>
+
+<option value="Medium"
+selected>
+
+🟡 Medium
+
+</option>
+
+<option value="Low">
+
+🟢 Low
+
+</option>
 
 </select>
 
 <select id="day">
 
-<option>Today</option>
+<option>
 
-<option>Tomorrow</option>
+Today
 
-<option>This Week</option>
+</option>
+
+<option>
+
+Tomorrow
+
+</option>
+
+<option>
+
+This Week
+
+</option>
 
 </select>
 
-<button id="addBtn">
+<button
+id="addBtn">
 
-＋ Add Task
+➕ Add Task
 
 </button>
 
+</div>
+
 </section>
 
-<section class="searchBox">
+<section class="searchSection">
+
+<div class="searchBox">
 
 <input
 id="search"
-placeholder="🔍 Search task...">
+type="text"
+placeholder="🔍 Search your tasks...">
+
+</div>
+
+<div class="quickStats">
+
+<div class="statItem">
+
+<h3>
+
+📋 Total
+
+</h3>
+
+<p id="totalTasks">
+
+0
+
+</p>
+
+</div>
+
+<div class="statItem">
+
+<h3>
+
+✅ Completed
+
+</h3>
+
+<p id="completedTasks">
+
+0
+
+</p>
+
+</div>
+
+<div class="statItem">
+
+<h3>
+
+⏳ Pending
+
+</h3>
+
+<p id="pendingTasks">
+
+0
+
+</p>
+
+</div>
+
+</div>
 
 </section>
 
-<section>
+<main class="taskContainer">
 
-<div class="sectionTitle">
+<section class="taskSection">
+
+<div class="sectionHeader">
+
+<h2>
 
 📅 Today
 
+</h2>
+
+<span
+class="badge"
+id="todayCount">
+
+0
+
+</span>
+
 </div>
 
-<div id="todayList" class="list"></div>
+<div
+id="todayList"
+class="taskList">
+
+</div>
 
 </section>
 
-<section>
+<section class="taskSection">
 
-<div class="sectionTitle">
+<div class="sectionHeader">
+
+<h2>
 
 🌅 Tomorrow
 
+</h2>
+
+<span
+class="badge"
+id="tomorrowCount">
+
+0
+
+</span>
+
 </div>
 
-<div id="tomorrowList" class="list"></div>
+<div
+id="tomorrowList"
+class="taskList">
+
+</div>
 
 </section>
 
-<section>
+<section class="taskSection">
 
-<div class="sectionTitle">
+<div class="sectionHeader">
+
+<h2>
 
 🗓 This Week
 
+</h2>
+
+<span
+class="badge"
+id="weekCount">
+
+0
+
+</span>
+
 </div>
 
-<div id="weekList" class="list"></div>
+<div
+id="weekList"
+class="taskList">
+
+</div>
 
 </section>
 
-<footer>
+</main>
 
-Made with ❤️ using GitHub Pages
+<section class="analytics">
 
-</footer>
+<div class="glass analyticsCard">
 
-<script src="app.js"></script>
+<h2>
+
+📈 Productivity
+
+</h2>
+
+<div class="progressBar">
+
+<div
+id="progressFill">
+
+</div>
+
+</div>
+
+<p id="analyticsText">
+
+Let's get started!
+
+</p>
+
+</div>
+
+<div class="glass analyticsCard">
+
+<h2>
+
+🏆 Achievement
+
+</h2>
+
+<p id="achievement">
+
+No achievements yet
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Edit Task Modal -->
+<!-- ========================= -->
+
+<div id="editModal" class="modal">
+
+    <div class="modal-content glass">
+
+        <h2>✏️ Edit Task</h2>
+
+        <input
+            type="text"
+            id="editTaskInput"
+            placeholder="Edit task...">
+
+        <select id="editCategory">
+
+            <option>🏠 Personal</option>
+            <option>💼 Work</option>
+            <option>🛒 Shopping</option>
+            <option>🚗 Travel</option>
+            <option>🏋 Fitness</option>
+
+        </select>
+
+        <select id="editPriority">
+
+            <option>🔴 High</option>
+            <option>🟡 Medium</option>
+            <option>🟢 Low</option>
+
+        </select>
+
+        <select id="editDay">
+
+            <option>Today</option>
+            <option>Tomorrow</option>
+            <option>This Week</option>
+
+        </select>
+
+        <div class="modalButtons">
+
+            <button id="saveEditBtn">
+
+                💾 Save
+
+            </button>
+
+            <button id="cancelEditBtn">
+
+                ❌ Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Delete Modal -->
+<!-- ========================= -->
+
+<div id="deleteModal" class="modal">
+
+    <div class="modal-content glass">
+
+        <h2>🗑 Delete Task?</h2>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
+
+        <div class="modalButtons">
+
+            <button id="confirmDeleteBtn">
+
+                Delete
+
+            </button>
+
+            <button id="cancelDeleteBtn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Floating Action Button -->
+<!-- ========================= -->
+
+<button
+id="fab"
+class="fab">
+
++
+
+</button>
+
+<!-- ========================= -->
+<!-- Toast Notification -->
+<!-- ========================= -->
+
+<div
+id="toast"
+class="toast">
+
+Task Saved Successfully
+
+</div>
+
+<!-- ========================= -->
+<!-- Loading Screen -->
+<!-- ========================= -->
+
+<div
+id="loadingScreen">
+
+<div class="loader"></div>
+
+<h2>
+
+Loading Errands Pro...
+
+</h2>
+
+</div>
+
+<!-- =======================
+     PART 4: SCRIPTS + CLOSING
+     ======================= -->
+
+<script>
+  // SIMPLE SEARCH FUNCTION (FIX FOR SEARCH BOX)
+  function searchSite() {
+    const input = document.getElementById("searchBox").value.toLowerCase().trim();
+
+    if (input === "") {
+      alert("Please type something to search.");
+      return;
+    }
+
+    // Example search logic (you can expand this)
+    if (input.includes("home")) {
+      window.location.href = "#home";
+    } else if (input.includes("about")) {
+      window.location.href = "#about";
+    } else if (input.includes("contact")) {
+      window.location.href = "#contact";
+    } else {
+      alert("No results found for: " + input);
+    }
+  }
+
+  // Optional: Enter key triggers search
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchBox = document.getElementById("searchBox");
+
+    if (searchBox) {
+      searchBox.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          searchSite();
+        }
+      });
+    }
+  });
+
+  // Optional: mobile menu toggle (if you have hamburger menu)
+  function toggleMenu() {
+    const menu = document.getElementById("navMenu");
+    if (menu) {
+      menu.classList.toggle("active");
+    }
+  }
+</script>
 
 </body>
-
 </html>
