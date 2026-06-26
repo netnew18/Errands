@@ -21,7 +21,6 @@
 <div class="background"></div>
 
 <header class="header">
-
   <div class="header-left">
     <h1>🗓 Errands Pro</h1>
     <p id="todayDate">Loading date...</p>
@@ -30,8 +29,9 @@
   <div class="header-right">
     <button id="themeBtn" class="iconBtn">🌙</button>
   </div>
-
 </header>
+
+<!-- ================= DASHBOARD ================= -->
 <section class="dashboard">
 
   <div class="glass progress-card">
@@ -60,19 +60,14 @@
 
 </section>
 
-<!-- ===================== TASK CREATOR ===================== -->
-
+<!-- ================= TASK CREATOR ================= -->
 <section class="controls">
 
   <h2>Create New Task</h2>
 
   <div class="taskForm">
 
-    <input
-      id="taskInput"
-      type="text"
-      placeholder="What do you need to do today?"
-    >
+    <input id="taskInput" type="text" placeholder="What do you need to do today?">
 
     <select id="category">
       <option value="Personal">🏠 Personal</option>
@@ -97,19 +92,13 @@
     <button id="addBtn">➕ Add Task</button>
 
   </div>
-
 </section>
 
-<!-- ===================== SEARCH + STATS ===================== -->
-
+<!-- ================= SEARCH ================= -->
 <section class="searchSection">
 
   <div class="searchBox">
-    <input
-      id="search"
-      type="text"
-      placeholder="🔍 Search your tasks..."
-    >
+    <input id="search" type="text" placeholder="🔍 Search your tasks...">
   </div>
 
   <div class="quickStats">
@@ -132,52 +121,40 @@
   </div>
 
 </section>
+
+<!-- ================= TASK LISTS ================= -->
 <main class="taskContainer">
 
-  <!-- ===================== TODAY ===================== -->
   <section class="taskSection">
-
     <div class="sectionHeader">
       <h2>📅 Today</h2>
       <span class="badge" id="todayCount">0</span>
     </div>
-
     <div id="todayList" class="taskList"></div>
-
   </section>
 
-  <!-- ===================== TOMORROW ===================== -->
   <section class="taskSection">
-
     <div class="sectionHeader">
       <h2>🌅 Tomorrow</h2>
       <span class="badge" id="tomorrowCount">0</span>
     </div>
-
     <div id="tomorrowList" class="taskList"></div>
-
   </section>
 
-  <!-- ===================== THIS WEEK ===================== -->
   <section class="taskSection">
-
     <div class="sectionHeader">
       <h2>🗓 This Week</h2>
       <span class="badge" id="weekCount">0</span>
     </div>
-
     <div id="weekList" class="taskList"></div>
-
   </section>
 
 </main>
 
-<!-- ===================== ANALYTICS ===================== -->
-
+<!-- ================= ANALYTICS ================= -->
 <section class="analytics">
 
   <div class="glass analyticsCard">
-
     <h2>📈 Productivity</h2>
 
     <div class="progressBar">
@@ -185,7 +162,6 @@
     </div>
 
     <p id="analyticsText">Let's get started!</p>
-
   </div>
 
   <div class="glass analyticsCard">
@@ -195,35 +171,13 @@
 
 </section>
 
-<!-- ===================== EDIT MODAL ===================== -->
-
+<!-- ================= MODALS ================= -->
 <div id="editModal" class="modal">
-
   <div class="modal-content glass">
 
     <h2>✏️ Edit Task</h2>
 
-    <input type="text" id="editTaskInput" placeholder="Edit task...">
-
-    <select id="editCategory">
-      <option>🏠 Personal</option>
-      <option>💼 Work</option>
-      <option>🛒 Shopping</option>
-      <option>🚗 Travel</option>
-      <option>🏋 Fitness</option>
-    </select>
-
-    <select id="editPriority">
-      <option>🔴 High</option>
-      <option>🟡 Medium</option>
-      <option>🟢 Low</option>
-    </select>
-
-    <select id="editDay">
-      <option>Today</option>
-      <option>Tomorrow</option>
-      <option>This Week</option>
-    </select>
+    <input type="text" id="editTaskInput">
 
     <div class="modalButtons">
       <button id="saveEditBtn">💾 Save</button>
@@ -231,13 +185,9 @@
     </div>
 
   </div>
-
 </div>
 
-<!-- ===================== DELETE MODAL ===================== -->
-
 <div id="deleteModal" class="modal">
-
   <div class="modal-content glass">
 
     <h2>🗑 Delete Task?</h2>
@@ -249,72 +199,57 @@
     </div>
 
   </div>
-
 </div>
 
-<!-- ===================== FLOATING BUTTON ===================== -->
-
+<!-- ================= FAB ================= -->
 <button id="fab" class="fab">+</button>
 
-<!-- ===================== TOAST ===================== -->
-
-<div id="toast" class="toast">
-  Task Saved Successfully
-</div>
-
-<!-- ===================== LOADING SCREEN ===================== -->
-
+<!-- ================= LOADING ================= -->
 <div id="loadingScreen">
   <div class="loader"></div>
   <h2>Loading Errands Pro...</h2>
 </div>
+
+<!-- ================= SCRIPT (LOCAL STORAGE ENABLED) ================= -->
 <script>
-/* =========================
-   BASIC STATE
-========================= */
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let editIndex = null;
 let deleteIndex = null;
 
-/* =========================
-   DOM ELEMENTS
-========================= */
 const taskInput = document.getElementById("taskInput");
 const category = document.getElementById("category");
 const priority = document.getElementById("priority");
 const day = document.getElementById("day");
 
+const search = document.getElementById("search");
+
 const todayList = document.getElementById("todayList");
 const tomorrowList = document.getElementById("tomorrowList");
 const weekList = document.getElementById("weekList");
 
-const search = document.getElementById("search");
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-/* =========================
-   ADD TASK
-========================= */
-document.getElementById("addBtn").addEventListener("click", () => {
+/* ADD */
+document.getElementById("addBtn").onclick = () => {
   const text = taskInput.value.trim();
+  if (!text) return;
 
-  if (!text) return alert("Please enter a task");
-
-  const task = {
+  tasks.push({
     text,
     category: category.value,
     priority: priority.value,
     day: day.value,
     done: false
-  };
+  });
 
-  tasks.push(task);
   taskInput.value = "";
-
+  saveTasks();
   renderTasks();
-});
+};
 
-/* =========================
-   RENDER TASKS
-========================= */
+/* RENDER */
 function renderTasks() {
   todayList.innerHTML = "";
   tomorrowList.innerHTML = "";
@@ -322,103 +257,85 @@ function renderTasks() {
 
   let completed = 0;
 
-  tasks.forEach((task, index) => {
+  tasks.forEach((t, i) => {
     const el = document.createElement("div");
     el.className = "taskItem";
-    el.innerHTML = `
-      <span onclick="toggleTask(${index})">
-        ${task.done ? "✅" : "⬜"} ${task.text}
-      </span>
 
+    el.innerHTML = `
+      <span onclick="toggleTask(${i})">
+        ${t.done ? "✅" : "⬜"} ${t.text}
+      </span>
       <div>
-        <button onclick="openEdit(${index})">✏️</button>
-        <button onclick="openDelete(${index})">🗑</button>
+        <button onclick="openEdit(${i})">✏️</button>
+        <button onclick="openDelete(${i})">🗑</button>
       </div>
     `;
 
-    if (task.day === "Today") todayList.appendChild(el);
-    else if (task.day === "Tomorrow") tomorrowList.appendChild(el);
+    if (t.day === "Today") todayList.appendChild(el);
+    else if (t.day === "Tomorrow") tomorrowList.appendChild(el);
     else weekList.appendChild(el);
 
-    if (task.done) completed++;
+    if (t.done) completed++;
   });
 
   updateStats(completed);
 }
 
-/* =========================
-   TOGGLE TASK
-========================= */
-function toggleTask(index) {
-  tasks[index].done = !tasks[index].done;
+/* TOGGLE */
+function toggleTask(i) {
+  tasks[i].done = !tasks[i].done;
+  saveTasks();
   renderTasks();
 }
 
-/* =========================
-   DELETE TASK
-========================= */
-function openDelete(index) {
-  deleteIndex = index;
+/* DELETE */
+function openDelete(i) {
+  deleteIndex = i;
   document.getElementById("deleteModal").style.display = "flex";
 }
 
 document.getElementById("confirmDeleteBtn").onclick = () => {
   tasks.splice(deleteIndex, 1);
-  closeDelete();
+  saveTasks();
   renderTasks();
+  document.getElementById("deleteModal").style.display = "none";
 };
 
-document.getElementById("cancelDeleteBtn").onclick = closeDelete;
-
-function closeDelete() {
+document.getElementById("cancelDeleteBtn").onclick = () => {
   document.getElementById("deleteModal").style.display = "none";
-}
+};
 
-/* =========================
-   EDIT TASK
-========================= */
-function openEdit(index) {
-  editIndex = index;
-
-  const t = tasks[index];
-
-  document.getElementById("editTaskInput").value = t.text;
-
+/* EDIT */
+function openEdit(i) {
+  editIndex = i;
+  document.getElementById("editTaskInput").value = tasks[i].text;
   document.getElementById("editModal").style.display = "flex";
 }
 
 document.getElementById("saveEditBtn").onclick = () => {
-  const val = document.getElementById("editTaskInput").value.trim();
+  tasks[editIndex].text =
+    document.getElementById("editTaskInput").value;
 
-  if (!val) return;
-
-  tasks[editIndex].text = val;
-
-  document.getElementById("editModal").style.display = "none";
-
+  saveTasks();
   renderTasks();
+  document.getElementById("editModal").style.display = "none";
 };
 
 document.getElementById("cancelEditBtn").onclick = () => {
   document.getElementById("editModal").style.display = "none";
 };
 
-/* =========================
-   SEARCH (FIXED)
-========================= */
-search.addEventListener("input", () => {
-  const value = search.value.toLowerCase();
-
-  document.querySelectorAll(".taskItem").forEach(item => {
-    item.style.display = item.innerText.toLowerCase().includes(value)
+/* SEARCH */
+search.oninput = () => {
+  document.querySelectorAll(".taskItem").forEach(el => {
+    el.style.display = el.innerText.toLowerCase()
+      .includes(search.value.toLowerCase())
       ? "flex"
       : "none";
   });
-});
+};
 
-/* =========================
-   STATS UPDATE
-========================= */
+/* STATS */
 function updateStats(completed) {
   document.getElementById("totalTasks").innerText = tasks.length;
   document.getElementById("completedTasks").innerText = completed;
@@ -436,28 +353,18 @@ function updateStats(completed) {
   document.getElementById("goalCount").innerText =
     tasks.filter(t => !t.done).length;
 
-  let percent = tasks.length === 0 ? 0 : Math.round((completed / tasks.length) * 100);
+  let percent = tasks.length
+    ? Math.round((completed / tasks.length) * 100)
+    : 0;
 
   document.getElementById("percent").innerText = percent + "%";
   document.getElementById("progressText").innerText =
     `${completed} of ${tasks.length} Completed`;
 
   document.getElementById("progressFill").style.width = percent + "%";
-
-  document.getElementById("analyticsText").innerText =
-    percent === 100 ? "All tasks completed! 🎉" : "Keep going!";
 }
 
-/* =========================
-   FAB (OPEN ADD QUICK)
-========================= */
-document.getElementById("fab").onclick = () => {
-  taskInput.focus();
-};
-
-/* =========================
-   INIT
-========================= */
+/* INIT */
 renderTasks();
 </script>
 
