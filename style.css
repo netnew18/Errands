@@ -333,3 +333,336 @@ height:100px;
 }
 
 }
+
+/* =====================================================
+   PART 2B - Premium Effects
+===================================================== */
+
+/* Smooth animation */
+*{
+    transition:
+        background .3s,
+        color .3s,
+        transform .25s,
+        box-shadow .25s;
+}
+
+/* Floating cards */
+
+.progress-card,
+.streak-card,
+.task{
+
+    animation:floatCard 5s ease-in-out infinite;
+
+}
+
+@keyframes floatCard{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-6px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* Better buttons */
+
+button{
+
+box-shadow:0 8px 20px rgba(37,99,235,.35);
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+filter:brightness(1.08);
+
+}
+
+button:active{
+
+transform:scale(.96);
+
+}
+
+/* Priority colors */
+
+.priority-high{
+
+background:#ef4444;
+
+color:white;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:.75rem;
+
+}
+
+.priority-medium{
+
+background:#f59e0b;
+
+color:white;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:.75rem;
+
+}
+
+.priority-low{
+
+background:#22c55e;
+
+color:white;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:.75rem;
+
+}
+
+/* Category Badge */
+
+.badge{
+
+display:inline-block;
+
+padding:5px 10px;
+
+border-radius:20px;
+
+background:#334155;
+
+font-size:.75rem;
+
+margin-top:6px;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111827;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#2563eb;
+
+border-radius:10px;
+
+}
+
+/* Glass hover */
+
+.task:hover{
+
+box-shadow:
+0 20px 40px rgba(59,130,246,.35);
+
+}
+
+/* Footer */
+
+footer{
+
+opacity:.7;
+
+font-size:.9rem;
+
+}
+
+/* Light Mode */
+
+body.light{
+
+background:#f3f4f6;
+
+color:#111827;
+
+}
+
+body.light .progress-card,
+body.light .streak-card,
+body.light .task,
+body.light input,
+body.light select{
+
+background:white;
+
+color:#111827;
+
+border:1px solid #e5e7eb;
+
+}
+
+body.light .sectionTitle{
+
+color:#111827;
+
+}
+
+body.light #themeBtn{
+
+background:white;
+
+color:#111827;
+
+}
+
+/* Nice Fade */
+
+.list .task{
+
+animation:fadeUp .35s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(12px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* Pulse Progress */
+
+.circle{
+
+animation:pulse 3s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:0 0 0 rgba(34,197,94,.4);
+
+}
+
+50%{
+
+box-shadow:0 0 30px rgba(34,197,94,.5);
+
+}
+
+100%{
+
+box-shadow:0 0 0 rgba(34,197,94,.4);
+
+}
+
+}
+
+/* Floating Add Button (future use) */
+
+.fab{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+width:65px;
+
+height:65px;
+
+border-radius:50%;
+
+font-size:32px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(135deg,#2563eb,#38bdf8);
+
+color:white;
+
+cursor:pointer;
+
+box-shadow:0 15px 30px rgba(37,99,235,.45);
+
+z-index:999;
+
+}
+
+.fab:hover{
+
+transform:scale(1.1) rotate(90deg);
+
+}
+
+/* Responsive polish */
+
+@media(max-width:600px){
+
+header h1{
+
+font-size:1.8rem;
+
+}
+
+.progress-card,
+.streak-card{
+
+padding:18px;
+
+}
+
+.sectionTitle{
+
+font-size:20px;
+
+}
+
+.task{
+
+padding:14px;
+
+}
+
+}
