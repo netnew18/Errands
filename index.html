@@ -2,30 +2,18 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Errands Pro</title>
+<meta name="theme-color" content="#2563eb">
 
-<meta name="theme-color"
-content="#2563eb">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="style.css">
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -34,603 +22,443 @@ href="style.css">
 
 <header class="header">
 
-<div class="header-left">
+  <div class="header-left">
+    <h1>🗓 Errands Pro</h1>
+    <p id="todayDate">Loading date...</p>
+  </div>
 
-<h1>
-
-🗓 Errands Pro
-
-</h1>
-
-<p id="todayDate">
-
-Loading date...
-
-</p>
-
-</div>
-
-<div class="header-right">
-
-<button
-id="themeBtn"
-class="iconBtn">
-
-🌙
-
-</button>
-
-</div>
+  <div class="header-right">
+    <button id="themeBtn" class="iconBtn">🌙</button>
+  </div>
 
 </header>
-
 <section class="dashboard">
 
-<div class="glass progress-card">
+  <div class="glass progress-card">
+    <h2>Today's Progress</h2>
 
-<h2>
+    <div class="progressCircle">
+      <div class="innerCircle">
+        <span id="percent">0%</span>
+      </div>
+    </div>
 
-Today's Progress
+    <p id="progressText">0 of 0 Completed</p>
+  </div>
 
-</h2>
+  <div class="glass streak-card">
+    <div class="emoji">🔥</div>
+    <h2 id="streak">0</h2>
+    <p>Day Streak</p>
+  </div>
 
-<div
-class="progressCircle">
-
-<div
-class="innerCircle">
-
-<span id="percent">
-
-0%
-
-</span>
-
-</div>
-
-</div>
-
-<p id="progressText">
-
-0 of 0 Completed
-
-</p>
-
-</div>
-
-<div class="glass streak-card">
-
-<div class="emoji">
-
-🔥
-
-</div>
-
-<h2 id="streak">
-
-0
-
-</h2>
-
-<p>
-
-Day Streak
-
-</p>
-
-</div>
-
-<div class="glass stats-card">
-
-<h2>
-
-Today's Goal
-
-</h2>
-
-<h1 id="goalCount">
-
-0
-
-</h1>
-
-<p>
-
-Tasks Remaining
-
-</p>
-
-</div>
+  <div class="glass stats-card">
+    <h2>Today's Goal</h2>
+    <h1 id="goalCount">0</h1>
+    <p>Tasks Remaining</p>
+  </div>
 
 </section>
+
+<!-- ===================== TASK CREATOR ===================== -->
 
 <section class="controls">
 
-<h2>
+  <h2>Create New Task</h2>
 
-Create New Task
+  <div class="taskForm">
 
-</h2>
+    <input
+      id="taskInput"
+      type="text"
+      placeholder="What do you need to do today?"
+    >
 
-<div class="taskForm">
+    <select id="category">
+      <option value="Personal">🏠 Personal</option>
+      <option value="Work">💼 Work</option>
+      <option value="Shopping">🛒 Shopping</option>
+      <option value="Travel">🚗 Travel</option>
+      <option value="Fitness">🏋 Fitness</option>
+    </select>
 
-<input
-id="taskInput"
-type="text"
-placeholder="What do you need to do today?">
+    <select id="priority">
+      <option value="High">🔴 High</option>
+      <option value="Medium" selected>🟡 Medium</option>
+      <option value="Low">🟢 Low</option>
+    </select>
 
-<select id="category">
+    <select id="day">
+      <option value="Today">Today</option>
+      <option value="Tomorrow">Tomorrow</option>
+      <option value="This Week">This Week</option>
+    </select>
 
-<option value="Personal">
+    <button id="addBtn">➕ Add Task</button>
 
-🏠 Personal
-
-</option>
-
-<option value="Work">
-
-💼 Work
-
-</option>
-
-<option value="Shopping">
-
-🛒 Shopping
-
-</option>
-
-<option value="Travel">
-
-🚗 Travel
-
-</option>
-
-<option value="Fitness">
-
-🏋 Fitness
-
-</option>
-
-</select>
-
-<select id="priority">
-
-<option value="High">
-
-🔴 High
-
-</option>
-
-<option value="Medium"
-selected>
-
-🟡 Medium
-
-</option>
-
-<option value="Low">
-
-🟢 Low
-
-</option>
-
-</select>
-
-<select id="day">
-
-<option>
-
-Today
-
-</option>
-
-<option>
-
-Tomorrow
-
-</option>
-
-<option>
-
-This Week
-
-</option>
-
-</select>
-
-<button
-id="addBtn">
-
-➕ Add Task
-
-</button>
-
-</div>
+  </div>
 
 </section>
+
+<!-- ===================== SEARCH + STATS ===================== -->
 
 <section class="searchSection">
 
-<div class="searchBox">
+  <div class="searchBox">
+    <input
+      id="search"
+      type="text"
+      placeholder="🔍 Search your tasks..."
+    >
+  </div>
 
-<input
-id="search"
-type="text"
-placeholder="🔍 Search your tasks...">
+  <div class="quickStats">
 
-</div>
+    <div class="statItem">
+      <h3>📋 Total</h3>
+      <p id="totalTasks">0</p>
+    </div>
 
-<div class="quickStats">
+    <div class="statItem">
+      <h3>✅ Completed</h3>
+      <p id="completedTasks">0</p>
+    </div>
 
-<div class="statItem">
+    <div class="statItem">
+      <h3>⏳ Pending</h3>
+      <p id="pendingTasks">0</p>
+    </div>
 
-<h3>
-
-📋 Total
-
-</h3>
-
-<p id="totalTasks">
-
-0
-
-</p>
-
-</div>
-
-<div class="statItem">
-
-<h3>
-
-✅ Completed
-
-</h3>
-
-<p id="completedTasks">
-
-0
-
-</p>
-
-</div>
-
-<div class="statItem">
-
-<h3>
-
-⏳ Pending
-
-</h3>
-
-<p id="pendingTasks">
-
-0
-
-</p>
-
-</div>
-
-</div>
+  </div>
 
 </section>
-
 <main class="taskContainer">
 
-<section class="taskSection">
+  <!-- ===================== TODAY ===================== -->
+  <section class="taskSection">
 
-<div class="sectionHeader">
+    <div class="sectionHeader">
+      <h2>📅 Today</h2>
+      <span class="badge" id="todayCount">0</span>
+    </div>
 
-<h2>
+    <div id="todayList" class="taskList"></div>
 
-📅 Today
+  </section>
 
-</h2>
+  <!-- ===================== TOMORROW ===================== -->
+  <section class="taskSection">
 
-<span
-class="badge"
-id="todayCount">
+    <div class="sectionHeader">
+      <h2>🌅 Tomorrow</h2>
+      <span class="badge" id="tomorrowCount">0</span>
+    </div>
 
-0
+    <div id="tomorrowList" class="taskList"></div>
 
-</span>
+  </section>
 
-</div>
+  <!-- ===================== THIS WEEK ===================== -->
+  <section class="taskSection">
 
-<div
-id="todayList"
-class="taskList">
+    <div class="sectionHeader">
+      <h2>🗓 This Week</h2>
+      <span class="badge" id="weekCount">0</span>
+    </div>
 
-</div>
+    <div id="weekList" class="taskList"></div>
 
-</section>
-
-<section class="taskSection">
-
-<div class="sectionHeader">
-
-<h2>
-
-🌅 Tomorrow
-
-</h2>
-
-<span
-class="badge"
-id="tomorrowCount">
-
-0
-
-</span>
-
-</div>
-
-<div
-id="tomorrowList"
-class="taskList">
-
-</div>
-
-</section>
-
-<section class="taskSection">
-
-<div class="sectionHeader">
-
-<h2>
-
-🗓 This Week
-
-</h2>
-
-<span
-class="badge"
-id="weekCount">
-
-0
-
-</span>
-
-</div>
-
-<div
-id="weekList"
-class="taskList">
-
-</div>
-
-</section>
+  </section>
 
 </main>
 
+<!-- ===================== ANALYTICS ===================== -->
+
 <section class="analytics">
 
-<div class="glass analyticsCard">
+  <div class="glass analyticsCard">
 
-<h2>
+    <h2>📈 Productivity</h2>
 
-📈 Productivity
+    <div class="progressBar">
+      <div id="progressFill"></div>
+    </div>
 
-</h2>
+    <p id="analyticsText">Let's get started!</p>
 
-<div class="progressBar">
+  </div>
 
-<div
-id="progressFill">
-
-</div>
-
-</div>
-
-<p id="analyticsText">
-
-Let's get started!
-
-</p>
-
-</div>
-
-<div class="glass analyticsCard">
-
-<h2>
-
-🏆 Achievement
-
-</h2>
-
-<p id="achievement">
-
-No achievements yet
-
-</p>
-
-</div>
+  <div class="glass analyticsCard">
+    <h2>🏆 Achievement</h2>
+    <p id="achievement">No achievements yet</p>
+  </div>
 
 </section>
 
-<!-- ========================= -->
-<!-- Edit Task Modal -->
-<!-- ========================= -->
+<!-- ===================== EDIT MODAL ===================== -->
 
 <div id="editModal" class="modal">
 
-    <div class="modal-content glass">
+  <div class="modal-content glass">
 
-        <h2>✏️ Edit Task</h2>
+    <h2>✏️ Edit Task</h2>
 
-        <input
-            type="text"
-            id="editTaskInput"
-            placeholder="Edit task...">
+    <input type="text" id="editTaskInput" placeholder="Edit task...">
 
-        <select id="editCategory">
+    <select id="editCategory">
+      <option>🏠 Personal</option>
+      <option>💼 Work</option>
+      <option>🛒 Shopping</option>
+      <option>🚗 Travel</option>
+      <option>🏋 Fitness</option>
+    </select>
 
-            <option>🏠 Personal</option>
-            <option>💼 Work</option>
-            <option>🛒 Shopping</option>
-            <option>🚗 Travel</option>
-            <option>🏋 Fitness</option>
+    <select id="editPriority">
+      <option>🔴 High</option>
+      <option>🟡 Medium</option>
+      <option>🟢 Low</option>
+    </select>
 
-        </select>
+    <select id="editDay">
+      <option>Today</option>
+      <option>Tomorrow</option>
+      <option>This Week</option>
+    </select>
 
-        <select id="editPriority">
-
-            <option>🔴 High</option>
-            <option>🟡 Medium</option>
-            <option>🟢 Low</option>
-
-        </select>
-
-        <select id="editDay">
-
-            <option>Today</option>
-            <option>Tomorrow</option>
-            <option>This Week</option>
-
-        </select>
-
-        <div class="modalButtons">
-
-            <button id="saveEditBtn">
-
-                💾 Save
-
-            </button>
-
-            <button id="cancelEditBtn">
-
-                ❌ Cancel
-
-            </button>
-
-        </div>
-
+    <div class="modalButtons">
+      <button id="saveEditBtn">💾 Save</button>
+      <button id="cancelEditBtn">❌ Cancel</button>
     </div>
+
+  </div>
 
 </div>
 
-<!-- ========================= -->
-<!-- Delete Modal -->
-<!-- ========================= -->
+<!-- ===================== DELETE MODAL ===================== -->
 
 <div id="deleteModal" class="modal">
 
-    <div class="modal-content glass">
+  <div class="modal-content glass">
 
-        <h2>🗑 Delete Task?</h2>
+    <h2>🗑 Delete Task?</h2>
+    <p>This action cannot be undone.</p>
 
-        <p>
-
-            This action cannot be undone.
-
-        </p>
-
-        <div class="modalButtons">
-
-            <button id="confirmDeleteBtn">
-
-                Delete
-
-            </button>
-
-            <button id="cancelDeleteBtn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
+    <div class="modalButtons">
+      <button id="confirmDeleteBtn">Delete</button>
+      <button id="cancelDeleteBtn">Cancel</button>
     </div>
 
-</div>
-
-<!-- ========================= -->
-<!-- Floating Action Button -->
-<!-- ========================= -->
-
-<button
-id="fab"
-class="fab">
-
-+
-
-</button>
-
-<!-- ========================= -->
-<!-- Toast Notification -->
-<!-- ========================= -->
-
-<div
-id="toast"
-class="toast">
-
-Task Saved Successfully
+  </div>
 
 </div>
 
-<!-- ========================= -->
-<!-- Loading Screen -->
-<!-- ========================= -->
+<!-- ===================== FLOATING BUTTON ===================== -->
 
-<div
-id="loadingScreen">
+<button id="fab" class="fab">+</button>
 
-<div class="loader"></div>
+<!-- ===================== TOAST ===================== -->
 
-<h2>
-
-Loading Errands Pro...
-
-</h2>
-
+<div id="toast" class="toast">
+  Task Saved Successfully
 </div>
 
-<!-- =======================
-     PART 4: SCRIPTS + CLOSING
-     ======================= -->
+<!-- ===================== LOADING SCREEN ===================== -->
 
+<div id="loadingScreen">
+  <div class="loader"></div>
+  <h2>Loading Errands Pro...</h2>
+</div>
 <script>
-  // SIMPLE SEARCH FUNCTION (FIX FOR SEARCH BOX)
-  function searchSite() {
-    const input = document.getElementById("searchBox").value.toLowerCase().trim();
+/* =========================
+   BASIC STATE
+========================= */
+let tasks = [];
+let editIndex = null;
+let deleteIndex = null;
 
-    if (input === "") {
-      alert("Please type something to search.");
-      return;
-    }
+/* =========================
+   DOM ELEMENTS
+========================= */
+const taskInput = document.getElementById("taskInput");
+const category = document.getElementById("category");
+const priority = document.getElementById("priority");
+const day = document.getElementById("day");
 
-    // Example search logic (you can expand this)
-    if (input.includes("home")) {
-      window.location.href = "#home";
-    } else if (input.includes("about")) {
-      window.location.href = "#about";
-    } else if (input.includes("contact")) {
-      window.location.href = "#contact";
-    } else {
-      alert("No results found for: " + input);
-    }
-  }
+const todayList = document.getElementById("todayList");
+const tomorrowList = document.getElementById("tomorrowList");
+const weekList = document.getElementById("weekList");
 
-  // Optional: Enter key triggers search
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchBox = document.getElementById("searchBox");
+const search = document.getElementById("search");
 
-    if (searchBox) {
-      searchBox.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          searchSite();
-        }
-      });
-    }
+/* =========================
+   ADD TASK
+========================= */
+document.getElementById("addBtn").addEventListener("click", () => {
+  const text = taskInput.value.trim();
+
+  if (!text) return alert("Please enter a task");
+
+  const task = {
+    text,
+    category: category.value,
+    priority: priority.value,
+    day: day.value,
+    done: false
+  };
+
+  tasks.push(task);
+  taskInput.value = "";
+
+  renderTasks();
+});
+
+/* =========================
+   RENDER TASKS
+========================= */
+function renderTasks() {
+  todayList.innerHTML = "";
+  tomorrowList.innerHTML = "";
+  weekList.innerHTML = "";
+
+  let completed = 0;
+
+  tasks.forEach((task, index) => {
+    const el = document.createElement("div");
+    el.className = "taskItem";
+    el.innerHTML = `
+      <span onclick="toggleTask(${index})">
+        ${task.done ? "✅" : "⬜"} ${task.text}
+      </span>
+
+      <div>
+        <button onclick="openEdit(${index})">✏️</button>
+        <button onclick="openDelete(${index})">🗑</button>
+      </div>
+    `;
+
+    if (task.day === "Today") todayList.appendChild(el);
+    else if (task.day === "Tomorrow") tomorrowList.appendChild(el);
+    else weekList.appendChild(el);
+
+    if (task.done) completed++;
   });
 
-  // Optional: mobile menu toggle (if you have hamburger menu)
-  function toggleMenu() {
-    const menu = document.getElementById("navMenu");
-    if (menu) {
-      menu.classList.toggle("active");
-    }
-  }
+  updateStats(completed);
+}
+
+/* =========================
+   TOGGLE TASK
+========================= */
+function toggleTask(index) {
+  tasks[index].done = !tasks[index].done;
+  renderTasks();
+}
+
+/* =========================
+   DELETE TASK
+========================= */
+function openDelete(index) {
+  deleteIndex = index;
+  document.getElementById("deleteModal").style.display = "flex";
+}
+
+document.getElementById("confirmDeleteBtn").onclick = () => {
+  tasks.splice(deleteIndex, 1);
+  closeDelete();
+  renderTasks();
+};
+
+document.getElementById("cancelDeleteBtn").onclick = closeDelete;
+
+function closeDelete() {
+  document.getElementById("deleteModal").style.display = "none";
+}
+
+/* =========================
+   EDIT TASK
+========================= */
+function openEdit(index) {
+  editIndex = index;
+
+  const t = tasks[index];
+
+  document.getElementById("editTaskInput").value = t.text;
+
+  document.getElementById("editModal").style.display = "flex";
+}
+
+document.getElementById("saveEditBtn").onclick = () => {
+  const val = document.getElementById("editTaskInput").value.trim();
+
+  if (!val) return;
+
+  tasks[editIndex].text = val;
+
+  document.getElementById("editModal").style.display = "none";
+
+  renderTasks();
+};
+
+document.getElementById("cancelEditBtn").onclick = () => {
+  document.getElementById("editModal").style.display = "none";
+};
+
+/* =========================
+   SEARCH (FIXED)
+========================= */
+search.addEventListener("input", () => {
+  const value = search.value.toLowerCase();
+
+  document.querySelectorAll(".taskItem").forEach(item => {
+    item.style.display = item.innerText.toLowerCase().includes(value)
+      ? "flex"
+      : "none";
+  });
+});
+
+/* =========================
+   STATS UPDATE
+========================= */
+function updateStats(completed) {
+  document.getElementById("totalTasks").innerText = tasks.length;
+  document.getElementById("completedTasks").innerText = completed;
+  document.getElementById("pendingTasks").innerText = tasks.length - completed;
+
+  document.getElementById("todayCount").innerText =
+    tasks.filter(t => t.day === "Today").length;
+
+  document.getElementById("tomorrowCount").innerText =
+    tasks.filter(t => t.day === "Tomorrow").length;
+
+  document.getElementById("weekCount").innerText =
+    tasks.filter(t => t.day === "This Week").length;
+
+  document.getElementById("goalCount").innerText =
+    tasks.filter(t => !t.done).length;
+
+  let percent = tasks.length === 0 ? 0 : Math.round((completed / tasks.length) * 100);
+
+  document.getElementById("percent").innerText = percent + "%";
+  document.getElementById("progressText").innerText =
+    `${completed} of ${tasks.length} Completed`;
+
+  document.getElementById("progressFill").style.width = percent + "%";
+
+  document.getElementById("analyticsText").innerText =
+    percent === 100 ? "All tasks completed! 🎉" : "Keep going!";
+}
+
+/* =========================
+   FAB (OPEN ADD QUICK)
+========================= */
+document.getElementById("fab").onclick = () => {
+  taskInput.focus();
+};
+
+/* =========================
+   INIT
+========================= */
+renderTasks();
 </script>
 
 </body>
