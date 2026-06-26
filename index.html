@@ -3,176 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>My Errands</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:Poppins,sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:25px;
+background:#0f172a;
+color:white;
+padding:20px;
 }
 
 .container{
-width:100%;
-max-width:900px;
+max-width:700px;
+margin:auto;
 }
 
-.title{
+h1{
 text-align:center;
-color:#fff;
-font-size:42px;
-font-weight:700;
-margin-bottom:30px;
+margin-bottom:15px;
+font-size:40px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
+.top{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+input{
+flex:1;
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:16px;
+}
+
+select{
+padding:14px;
+border:none;
+border-radius:12px;
+}
+
+button{
+padding:14px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+cursor:pointer;
 }
 
 .card{
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.15);
+margin-top:20px;
+background:rgba(255,255,255,.08);
+padding:20px;
 border-radius:20px;
-padding:25px;
-box-shadow:0 15px 35px rgba(0,0,0,.25);
-}
-
-.card h2{
-color:#fff;
-margin-bottom:20px;
+backdrop-filter:blur(20px);
 }
 
 .task{
 display:flex;
 align-items:center;
-padding:14px;
+justify-content:space-between;
 background:rgba(255,255,255,.08);
+padding:12px;
 border-radius:12px;
-margin-bottom:12px;
-transition:.25s;
+margin-top:10px;
 }
 
-.task:hover{
-transform:translateX(6px);
-background:rgba(255,255,255,.15);
+.left{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-.task input{
-width:22px;
-height:22px;
-accent-color:#22c55e;
-margin-right:12px;
-}
-
-.task span{
-color:white;
-font-size:18px;
-}
-
-.task input:checked + span{
+.done{
 text-decoration:line-through;
 opacity:.5;
 }
 
-.footer{
-text-align:center;
-color:#cbd5e1;
-margin-top:25px;
+.progress{
+height:12px;
+background:#334155;
+border-radius:20px;
+margin:20px 0;
+overflow:hidden;
 }
-</style>
 
+.bar{
+height:100%;
+width:0%;
+background:#22c55e;
+}
+
+.search{
+width:100%;
+margin-bottom:20px;
+}
+
+.mode{
+margin-top:20px;
+width:100%;
+background:#475569;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="title">🗓 My Errands</div>
+<h1>🗓️ My Errands</h1>
 
-<div class="grid">
+<input class="search" id="search" placeholder="Search task...">
 
-<div class="card">
+<div class="top">
+<input id="task" placeholder="New task">
+<select id="section">
+<option>Today</option>
+<option>Tomorrow</option>
+<option>This Week</option>
+</select>
+<button onclick="addTask()">Add</button>
+</div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<div id="today" class="card">
 <h2>📅 Today</h2>
-
-<label class="task">
-<input type="checkbox">
-<span>🥟 Siomai</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🏬 Wilcon</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🚶 Walking</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🛒 Grocery</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🏠 Uwi</span>
-</label>
-
 </div>
 
-<div class="card">
+<div id="tomorrow" class="card">
 <h2>🌅 Tomorrow</h2>
+</div>
 
-<label class="task">
-<input type="checkbox">
-<span>🥬 Palengke</span>
-</label>
+<div id="week" class="card">
+<h2>🗓️ This Week</h2>
+</div>
 
-<label class="task">
-<input type="checkbox">
-<span>🏬 Wilcon</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🏠 Uwi</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🧹 Linis</span>
-</label>
-
-<label class="task">
-<input type="checkbox">
-<span>🥤 Shake</span>
-</label>
+<button class="mode" onclick="toggleMode()">🌙 Toggle Dark Mode</button>
 
 </div>
 
+<script>
+
+let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
+
+function save(){
+localStorage.setItem("tasks",JSON.stringify(tasks));
+render();
+}
+
+function addTask(){
+
+let name=document.getElementById("task").value.trim();
+
+if(name=="")return;
+
+tasks.push({
+text:name,
+section:document.getElementById("section").value,
+done:false
+});
+
+document.getElementById("task").value="";
+
+save();
+
+}
+
+function render(){
+
+today.innerHTML="<h2>📅 Today</h2>";
+tomorrow.innerHTML="<h2>🌅 Tomorrow</h2>";
+week.innerHTML="<h2>🗓️ This Week</h2>";
+
+let search=document.getElementById("search").value.toLowerCase();
+
+let completed=0;
+
+tasks.forEach((t,i)=>{
+
+if(!t.text.toLowerCase().includes(search))return;
+
+if(t.done)completed++;
+
+let div=document.createElement("div");
+
+div.className="task";
+
+div.innerHTML=`
+
+<div class="left">
+
+<input type="checkbox" ${t.done?"checked":""}
+onclick="toggle(${i})">
+
+<span class="${t.done?"done":""}">${t.text}</span>
+
 </div>
 
-<div class="footer">
-Made with ❤️ using GitHub Pages
-</div>
+<div>
+
+<button onclick="editTask(${i})">✏️</button>
+
+<button onclick="removeTask(${i})">🗑️</button>
 
 </div>
+
+`;
+
+if(t.section=="Today")
+today.appendChild(div);
+
+if(t.section=="Tomorrow")
+tomorrow.appendChild(div);
+
+if(t.section=="This Week")
+week.appendChild(div);
+
+});
+
+let percent=tasks.length?completed/tasks.length*100:0;
+
+document.getElementById("bar").style.width=percent+"%";
+
+}
+
+function toggle(i){
+
+tasks[i].done=!tasks[i].done;
+
+save();
+
+}
+
+function removeTask(i){
+
+tasks.splice(i,1);
+
+save();
+
+}
+
+function editTask(i){
+
+let n=prompt("Edit task",tasks[i].text);
+
+if(n){
+
+tasks[i].text=n;
+
+save();
+
+}
+
+}
+
+document.getElementById("search").oninput=render;
+
+function toggleMode(){
+
+if(document.body.style.background=="white"){
+
+document.body.style.background="#0f172a";
+
+document.body.style.color="white";
+
+}else{
+
+document.body.style.background="white";
+
+document.body.style.color="black";
+
+}
+
+}
+
+render();
+
+</script>
 
 </body>
 </html>
