@@ -3,117 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Duties</title>
+<title>My Errands</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
-    color:white;
+background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:25px;
 }
 
 .container{
-    width:100%;
-    max-width:900px;
+width:100%;
+max-width:900px;
 }
 
-.header{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.header h1{
-    font-size:40px;
-    font-weight:700;
-}
-
-.header p{
-    color:#cbd5e1;
-    margin-top:8px;
+.title{
+text-align:center;
+color:#fff;
+font-size:42px;
+font-weight:700;
+margin-bottom:30px;
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
 }
 
 .card{
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:22px;
-    padding:25px;
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:20px;
+padding:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
 }
 
 .card h2{
-    margin-bottom:18px;
-    font-size:24px;
+color:#fff;
+margin-bottom:20px;
 }
 
 .task{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    background:rgba(255,255,255,.08);
-    padding:14px 16px;
-    border-radius:14px;
-    margin-bottom:14px;
-    transition:.25s;
+display:flex;
+align-items:center;
+padding:14px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+margin-bottom:12px;
+transition:.25s;
 }
 
 .task:hover{
-    transform:translateX(6px);
-    background:rgba(255,255,255,.12);
+transform:translateX(6px);
+background:rgba(255,255,255,.15);
 }
 
 .task input{
-    width:22px;
-    height:22px;
-    accent-color:#22c55e;
+width:22px;
+height:22px;
+accent-color:#22c55e;
+margin-right:12px;
 }
 
 .task span{
-    font-size:17px;
-    flex:1;
+color:white;
+font-size:18px;
 }
 
 .task input:checked + span{
-    text-decoration:line-through;
-    opacity:.55;
+text-decoration:line-through;
+opacity:.5;
 }
 
 .footer{
-    margin-top:30px;
-    text-align:center;
-    color:#cbd5e1;
-    font-size:14px;
+text-align:center;
+color:#cbd5e1;
+margin-top:25px;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="header">
-<h1>🗓 My Duties</h1>
-<p>Stay focused. Finish one task at a time.</p>
-</div>
+<div class="title">🗓 My Errands</div>
 
 <div class="grid">
 
@@ -127,7 +116,7 @@ body{
 
 <label class="task">
 <input type="checkbox">
-<span>🏗️ Wilcon</span>
+<span>🏬 Wilcon</span>
 </label>
 
 <label class="task">
@@ -157,7 +146,7 @@ body{
 
 <label class="task">
 <input type="checkbox">
-<span>🏗️ Wilcon</span>
+<span>🏬 Wilcon</span>
 </label>
 
 <label class="task">
@@ -180,7 +169,7 @@ body{
 </div>
 
 <div class="footer">
-Made with ❤️ • Modern Glassmorphism Checklist
+Made with ❤️ using GitHub Pages
 </div>
 
 </div>
